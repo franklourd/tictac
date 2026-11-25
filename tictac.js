@@ -105,6 +105,15 @@ function startRound() {
   updateTurn();
 }
 
+function restartRound() {
+  gameState = Array(9).fill("");
+  currentPlayer = roundStarter;
+  gameActive = true;
+  resetBtn.textContent = 'Restart round';
+  createBoard();
+  updateTurn();
+}
+
 function startMatch() {
   scores = { X: 0, O: 0, draw: 0 };
   roundStarter = 'O';
@@ -112,7 +121,13 @@ function startMatch() {
   startRound();
 }
 
-resetBtn.addEventListener('click', startRound);
+resetBtn.addEventListener('click', () => {
+  if (gameActive) {
+    restartRound();
+  } else {
+    startRound();
+  }
+});
 newMatchBtn.addEventListener('click', startMatch);
 
 createBoard();
